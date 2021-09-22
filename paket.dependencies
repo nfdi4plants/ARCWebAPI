@@ -21,3 +21,6 @@ nuget Fulma
 nuget Fake.Core.Target
 nuget Fake.IO.FileSystem
 nuget Farmer
+
+nuget ISADotNet
+nuget ISADotNet.XLSX
