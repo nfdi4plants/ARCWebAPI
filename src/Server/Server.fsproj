@@ -5,11 +5,20 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="paket.references" />
+    <Compile Include="Arc.fs" />
+    <Compile Include="ISA.fs" />
+    <Compile Include="Controllers\Person.fs" />
+    <Compile Include="Controllers\Assay.fs" />
+    <Compile Include="Controllers\Arc.fs" />
     <Compile Include="Server.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.fsproj" />
+    <PackageReference Include="ISADotNet" Version="0.2.6" />
+    <PackageReference Include="ISADotNet.XLSX" Version="0.2.6" />
+    <PackageReference Include="Saturn" Version="0.15.0-preview03" />
+    <PackageReference Include="System.Text.Json" Version="5.0.2" />
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="5.0.1" />
+  </ItemGroup>
 </Project>

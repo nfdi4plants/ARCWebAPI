@@ -1,54 +1,29 @@
 module Server
 
-open Fable.Remoting.Server
-open Fable.Remoting.Giraffe
+open Giraffe
 open Saturn
 
-open Shared
 
-type Storage() =
-    let todos = ResizeArray<_>()
+module Routers = 
+  
+    //let arcRouter = router {
+    //    //forward "/assays" Controllers.Assay.assayController
+    //    forward "/arc" Controllers.Arc.arcController
+    //}
 
-    member __.GetTodos() = List.ofSeq todos
+    let apiRouter = router {
+        not_found_handler (setStatusCode 404 >=> text "Api 404")
+        forward "/arcs" Controllers.Arc.arcController
+    }
 
-    member __.AddTodo(todo: Todo) =
-        if Todo.isValid todo.Description then
-            todos.Add todo
-            Ok()
-        else
-            Error "Invalid todo"
-
-let storage = Storage()
-
-storage.AddTodo(Todo.create "Create new SAFE project")
-|> ignore
-
-storage.AddTodo(Todo.create "Write your app")
-|> ignore
-
-storage.AddTodo(Todo.create "Ship it !!!")
-|> ignore
-
-let todosApi =
-    { getTodos = fun () -> async { return storage.GetTodos() }
-      addTodo =
-          fun todo ->
-              async {
-                  match storage.AddTodo todo with
-                  | Ok () -> return todo
-                  | Error e -> return failwith e
-              } }
-
-let webApp =
-    Remoting.createApi ()
-    |> Remoting.withRouteBuilder Route.builder
-    |> Remoting.fromValue todosApi
-    |> Remoting.buildHttpHandler
+    let router = router {
+        forward "/api" apiRouter
+    }
 
 let app =
     application {
         url "http://0.0.0.0:8085"
-        use_router webApp
+        use_router Routers.router
         memory_cache
         use_static "public"
         use_gzip
