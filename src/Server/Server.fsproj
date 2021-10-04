@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Include="Arc.fs" />
     <Compile Include="ISA.fs" />
+    <Compile Include="Controllers\Protocol.fs" />
     <Compile Include="Controllers\Person.fs" />
     <Compile Include="Controllers\Assay.fs" />
     <Compile Include="Controllers\Arc.fs" />

@@ -19,7 +19,7 @@ type SparseMatrixExtensions =
         |> Seq.reduce (fun a b -> a + "\n" + b) 
 
 
-module Persons = 
+module Json = 
 
 
     let vizualizeJson persons =

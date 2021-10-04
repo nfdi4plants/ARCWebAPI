@@ -36,12 +36,13 @@ module Assay =
     let assayController arcName = controller {
 
         subController "/persons" (Person.assayPersonController arcName)
+        subController "/protocols" (Protocol.assayProtocolController arcName)
 
         index (fun ctx ->
             let arcPath = Arc.getArcPath arcName
             let assays = getAssays arcPath
             assays
-            |> ISA.Persons.vizualizeJson
+            |> ISA.Json.vizualizeJson
             |> Controller.text ctx
         )
         show (fun ctx assayName -> 
@@ -49,7 +50,7 @@ module Assay =
             let assays = getAssays arcPath
             assays
             |> tryPickAssayByName assayName
-            |> ISA.Persons.vizualizeJson
+            |> ISA.Json.vizualizeJson
             |> Controller.text ctx
         )
     }

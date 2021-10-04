@@ -7,7 +7,7 @@ module Arc =
     let arcController = controller {
 
         subController "/assays" Assay.assayController
-        //subController "/persons" Person.personController
+        subController "/persons" Person.personController
 
         index (fun ctx -> 
             Arc.arcBasePath
@@ -21,7 +21,7 @@ module Arc =
             match inv with
             | Some p -> 
                 ISADotNet.XLSX.Investigation.fromFile p          
-                |> ISA.Persons.vizualizeJson
+                |> ISA.Json.vizualizeJson
                 |> Controller.text ctx
             | None -> failwithf "arc %s has no investigation" arcPath
         )

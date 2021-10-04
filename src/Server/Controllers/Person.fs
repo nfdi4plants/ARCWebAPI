@@ -44,7 +44,7 @@ module Person =
             let arcPath = Arc.getArcPath arcName
             let persons = getPersons arcPath
             persons
-            |> ISA.Persons.vizualizeJson
+            |> ISA.Json.vizualizeJson
             |> Controller.text ctx
         )
         show (fun ctx personName -> 
@@ -52,7 +52,7 @@ module Person =
             let persons = getPersons arcPath
             persons
             |> tryPickPersonByFullName personName
-            |> ISA.Persons.vizualizeJson
+            |> ISA.Json.vizualizeJson
             |> Controller.text ctx
         )
     }
@@ -67,7 +67,7 @@ module Person =
             let arcPath = Arc.getArcPath arcName
             let persons = getAssayPersons assay arcPath
             persons
-            |> ISA.Persons.vizualizeJson
+            |> ISA.Json.vizualizeJson
             |> Controller.text ctx
         )
         show (fun ctx personName -> 
@@ -75,7 +75,7 @@ module Person =
             let persons = getAssayPersons assay arcPath
             persons
             |> tryPickPersonByFullName personName
-            |> ISA.Persons.vizualizeJson
+            |> ISA.Json.vizualizeJson
             |> Controller.text ctx
         )
     }
